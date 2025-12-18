@@ -1,0 +1,45 @@
+name: "TSGO Readiness Bot"
+description: "Run TypeScript 7 native preview (tsgo) on PRs and report diagnostics"
+author: "you"
+branding:
+  icon: "check-circle"
+  color: "blue"
+inputs:
+  tsconfig:
+    description: "Path to tsconfig.json (or build config if mode=build)"
+    required: false
+    default: "tsconfig.json"
+  github-token:
+    description: "GitHub token for creating/updating PR comments (e.g. secrets.GITHUB_TOKEN)"
+    required: false
+  installMode:
+    description: "How to run tsgo: npx (no install) or local (expects tsgo on PATH)"
+    required: false
+    default: "npx"
+  mode:
+    description: "project (tsgo --project) or build (tsgo -b)"
+    required: false
+    default: "project"
+  noEmit:
+    description: "Pass --noEmit"
+    required: false
+    default: "true"
+  extendedDiagnostics:
+    description: "Pass --extendedDiagnostics"
+    required: false
+    default: "false"
+  failOnError:
+    description: "Fail the action if tsgo exits non-zero"
+    required: false
+    default: "true"
+  maxDiagnostics:
+    description: "Max diagnostics to include in comment/summary"
+    required: false
+    default: "50"
+  commentMode:
+    description: "sticky or off"
+    required: false
+    default: "sticky"
+runs:
+  using: "node20"
+  main: "dist/index.js"
